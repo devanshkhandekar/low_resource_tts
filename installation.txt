@@ -1,0 +1,46 @@
+1. Conda create environment with python==3.8 or python==3.9:
+eg: conda create --name low_resource_tts python=3.8;conda activate low_resource_tts
+
+2. Install pytorch compatible wth the systems cuda version:
+eg: conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
+
+or via espnet scripts 
+
+>>> cd espnet/tools
+>>>  make TH_VERSION=1.13.1 CUDA_VERSION=11.7 #Note that the CUDA version is derived from nvcc command. If you’d like to specify the other CUDA version, you need to give CUDA_VERSION.
+
+3. Install espnet and other necessary dependencies as per below steps:
+
+>>> cd espnet/tools
+	#cuda_root=<cuda-root>  # e.g. <cuda-root> = /usr/local/cuda
+	#CUDA_VERSION := $(shell nvcc --version | grep "Cuda compilation tools" | cut -d" " -f5 | sed s/,//)
+	#WITH_OMP=ON
+>>>bash -c ". activate_python.sh; . ./setup_cuda_env.sh $cuda_root; ./installers/install_sph2pipe.sh
+
+>>>./activate_python.sh && python3 -m pip install packaging
+>>>./activate_python.sh && python3 -m pip install -U numba
+
+>>>./activate_python.sh && ./installers/install_chainer.sh "${CUDA_VERSION}"
+>>> ./activate_python.sh && ./installers/install_warp-transducer.sh ${WITH_OMP}
+>>>./activate_python.sh && ./installers/install_chainer_ctc.sh ${WITH_OMP}
+>>> ./installers/install_nkf.sh
+>>>./activate_python.sh && ./installers/install_pyopenjtalk.sh
+>>>./activate_python.sh && ./installers/install_phonemizer.sh
+>>>./activate_python.sh && ./installers/install_speechbrain.sh
+>>> git clone --depth 1 https://github.com/moses-smt/mosesdecoder.git moses
+>>>./installers/install_mwerSegmenter.sh
+>>>./activate_python.sh && ./installers/install_kenlm.sh
+>>>./installers/install_pesq.sh
+>>>./activate_python.sh && ./installers/install_py3mmseg.sh
+>>>./activate_python.sh && ./installers/install_torch_optimizer.sh
+>>>./activate_python.sh && ./installers/install_fairscale.sh
+>>>./activate_python.sh && ./installers/install_fairseq.sh
+>>>./activate_python.sh && ./installers/install_s3prl.sh
+>>>./activate_python.sh && ./installers/install_k2.sh
+>>>./activate_python.sh && ./installers/install_gtn.sh
+>>>./activate_python.sh && ./installers/install_transformers.sh
+>>>./activate_python.sh && ./installers/install_longformer.sh
+>>>./activate_python.sh && ./installers/install_muskit.sh
+
+>>>./activate_python.sh; . ./extra_path.sh; python3 check_install.py
+
