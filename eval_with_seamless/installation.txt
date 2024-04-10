@@ -1,0 +1,16 @@
+1. Conda create environment with python>=3.9:
+eg: conda create --name seamless_eval_env python=3.9;conda activate seamless_eval_env
+
+2. Install pytorch compatible wth the systems cuda version: The currently tested version for fairseq2 and seamless model is torch==2.1.0 torchaudio==2.1.0 and cuda=12.1
+eg: conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+
+3. For linux systems install libsndfile1 and ffmpeg:
+eg: apt-get update && apt-get install libsndfile-dev ffmpeg
+
+4. pip install huggingface-hub==0.19.3 hf-transfer==0.1.4 omegaconf==2.3.0
+
+5. pip install fairseq2 --pre --extra-index-url https://fair.pkg.atmeta.com/fairseq2/pt2.1.0/cu121
+
+6. pip install ./seamless_communication-1.0.0-py3-none-any.whl
+
+7. In the initial run of the eval_s2t.py the necessary models and vocoders will be downloaded and installed in the 'models' folder
